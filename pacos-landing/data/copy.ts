@@ -12,6 +12,8 @@ export const eventsCopy = {
   heading: "ESTA SEMANA EN PACO'S",
   caption: 'Llega antes de las 8PM para asegurar tu lugar',
   instagramCta: '¿Quieres saber qué viene? Síguenos en Instagram',
+  emptyStateHeading: 'PRÓXIMAMENTE NUEVA CARTELERA',
+  emptyStateMessage: 'Síguenos en Instagram para la próxima cartelera',
 }
 
 export const menuCopy = {
