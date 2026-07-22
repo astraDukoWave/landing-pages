@@ -1,6 +1,6 @@
-import { business, buildWhatsAppHref } from '@/config/business'
 import { menuItems } from '@/data/menu'
 import { menuCopy } from '@/data/copy'
+import WhatsAppCta from './WhatsAppCta'
 
 export default function MenuHero() {
   return (
@@ -49,14 +49,12 @@ export default function MenuHero() {
         </div>
 
         <div className="mt-12 flex justify-center md:mt-16">
-          <a
-            href={buildWhatsAppHref(business.whatsapp.messages.menu)}
-            target="_blank"
-            rel="noreferrer noopener"
+          <WhatsAppCta
+            context="menu"
             className="inline-flex items-center justify-center rounded-full bg-brand-primary px-6 py-3 text-sm font-bold uppercase tracking-[0.18em] text-black transition-colors hover:bg-brand-primary-strong"
           >
             {menuCopy.ctaLabel}
-          </a>
+          </WhatsAppCta>
         </div>
       </div>
     </section>

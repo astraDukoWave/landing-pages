@@ -1,8 +1,8 @@
 "use client"
 
 import { useEffect, useState } from 'react'
-import { business, buildWhatsAppHref } from '@/config/business'
 import { navCopy } from '@/data/copy'
+import WhatsAppCta from './WhatsAppCta'
 
 function useScrollTrigger(threshold = 8) {
   const [triggered, setTriggered] = useState(false)
@@ -42,16 +42,14 @@ export default function NavBar() {
           </span>
         </div>
 
-        <a
-          href={buildWhatsAppHref(business.whatsapp.messages.nav)}
-          target="_blank"
-          rel="noreferrer noopener"
-          aria-label="Pide ahora por WhatsApp"
+        <WhatsAppCta
+          context="nav"
+          ariaLabel="Pide ahora por WhatsApp"
           className="inline-flex items-center justify-center rounded-full bg-brand-primary px-4 py-2 text-sm font-bold text-black transition-all duration-300 hover:bg-brand-primary-strong hover:shadow-[0_0_20px_theme(colors.brand.primary/40%)] sm:px-5 sm:text-base"
         >
           <span className="sm:hidden">{navCopy.ctaShort}</span>
           <span className="hidden sm:inline">{navCopy.ctaLong}</span>
-        </a>
+        </WhatsAppCta>
       </div>
     </nav>
   )

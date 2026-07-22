@@ -1,5 +1,6 @@
-import { business, buildWhatsAppHref, copyrightYear, formatWeeklyHoursSummary } from '@/config/business'
+import { business, copyrightYear, formatWeeklyHoursSummary } from '@/config/business'
 import { footerCopy } from '@/data/copy'
+import WhatsAppCta from './WhatsAppCta'
 
 export default function Footer() {
   return (
@@ -27,15 +28,13 @@ export default function Footer() {
           </div>
 
           <div className="space-y-4 text-sm">
-            <a
-              href={buildWhatsAppHref(business.whatsapp.messages.footer)}
-              target="_blank"
-              rel="noreferrer noopener"
+            <WhatsAppCta
+              context="footer"
               className="inline-flex items-center gap-2 font-semibold text-ink transition-colors hover:text-brand-primary"
             >
               <span aria-hidden="true">💬</span>
               <span>{footerCopy.whatsappLabel}</span>
-            </a>
+            </WhatsAppCta>
 
             <a
               href={`https://instagram.com/${business.instagram.handle}`}

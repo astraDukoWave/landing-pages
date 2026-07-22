@@ -3,6 +3,7 @@ import { Bebas_Neue, Inter } from 'next/font/google'
 import './globals.css'
 import { business } from '@/config/business'
 import { buildLocalBusinessSchema } from '@/lib/schema'
+import DemoNoticeToast from '@/components/DemoNoticeToast'
 
 const bebasNeue = Bebas_Neue({
   subsets: ['latin'],
@@ -66,6 +67,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(buildLocalBusinessSchema()) }}
         />
         {children}
+        {business.whatsapp.mode === 'demo' && <DemoNoticeToast />}
       </body>
     </html>
   )

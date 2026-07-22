@@ -17,7 +17,8 @@ export type WhatsAppContext = 'nav' | 'menu' | 'footer'
 export type WhatsAppConfig = {
   mode: WhatsAppMode
   activeNumber: string | null
-  messages: Record<WhatsAppContext, string> & { default: string }
+  // Solo `default` es obligatorio: un contexto sin mensaje propio cae en él (REQ-08).
+  messages: Partial<Record<WhatsAppContext, string>> & { default: string }
 }
 
 export type BusinessConfig = {
