@@ -1,18 +1,6 @@
 import { business, buildWhatsAppHref } from '@/config/business'
-
-type MenuItem = {
-  name: string
-  badge?: string
-}
-
-const menuItems: MenuItem[] = [
-  { name: 'CLASSIC WINGS', badge: 'EL MÁS PEDIDO' },
-  { name: 'WINGS BBQ AHUMADAS' },
-  { name: 'BONELESS PICOSOS', badge: '🔥 FAVORITO' },
-  { name: 'CUBETA DE CHELAS', badge: 'MEJOR OFERTA' },
-  { name: 'PAPAS LOADED' },
-  { name: 'ALITAS MIX 50 PZS', badge: 'PARA EL GRUPO' },
-]
+import { menuItems } from '@/data/menu'
+import { menuCopy } from '@/data/copy'
 
 export default function MenuHero() {
   return (
@@ -20,10 +8,10 @@ export default function MenuHero() {
       <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-8">
         <div className="max-w-3xl">
           <h2 className="font-display text-5xl uppercase tracking-tight text-ink md:text-7xl">
-            LO QUE PEDIRÁS
+            {menuCopy.heading}
           </h2>
           <p className="mt-4 font-body italic text-ink/40">
-            Cholula nunca olió tan bien
+            {menuCopy.caption}
           </p>
         </div>
 
@@ -67,7 +55,7 @@ export default function MenuHero() {
             rel="noreferrer noopener"
             className="inline-flex items-center justify-center rounded-full bg-brand-primary px-6 py-3 text-sm font-bold uppercase tracking-[0.18em] text-black transition-colors hover:bg-brand-primary-strong"
           >
-            VER MENÚ COMPLETO
+            {menuCopy.ctaLabel}
           </a>
         </div>
       </div>

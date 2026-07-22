@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { business, formatWeeklyHoursSummary } from '@/config/business'
+import { heroCopy } from '@/data/copy'
 
 function useScrollTrigger() {
   const [triggered, setTriggered] = useState(false)
@@ -66,7 +67,7 @@ export default function Hero() {
               <span className="inline-flex h-2.5 w-2.5 items-center justify-center rounded-full bg-white/20">
                 <span className="h-2 w-2 rounded-full bg-white animate-pulse" />
               </span>
-              <span>EN VIVO ESTE SÁBADO</span>
+              <span>{heroCopy.liveBadge}</span>
             </div>
 
             <h1
@@ -74,7 +75,7 @@ export default function Hero() {
               style={{ transitionDelay: '300ms' }}
             >
               <span className="block max-w-[10ch] sm:max-w-none">
-                WINGS. CHELA. CHOLULA.
+                {heroCopy.headline}
               </span>
             </h1>
 

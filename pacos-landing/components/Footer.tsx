@@ -1,4 +1,5 @@
 import { business, buildWhatsAppHref, copyrightYear, formatWeeklyHoursSummary } from '@/config/business'
+import { footerCopy } from '@/data/copy'
 
 export default function Footer() {
   return (
@@ -33,7 +34,7 @@ export default function Footer() {
               className="inline-flex items-center gap-2 font-semibold text-ink transition-colors hover:text-brand-primary"
             >
               <span aria-hidden="true">💬</span>
-              <span>Escríbenos</span>
+              <span>{footerCopy.whatsappLabel}</span>
             </a>
 
             <a

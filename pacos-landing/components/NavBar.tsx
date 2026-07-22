@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { business, buildWhatsAppHref } from '@/config/business'
+import { navCopy } from '@/data/copy'
 
 function useScrollTrigger(threshold = 8) {
   const [triggered, setTriggered] = useState(false)
@@ -48,8 +49,8 @@ export default function NavBar() {
           aria-label="Pide ahora por WhatsApp"
           className="inline-flex items-center justify-center rounded-full bg-brand-primary px-4 py-2 text-sm font-bold text-black transition-all duration-300 hover:bg-brand-primary-strong hover:shadow-[0_0_20px_theme(colors.brand.primary/40%)] sm:px-5 sm:text-base"
         >
-          <span className="sm:hidden">PIDE</span>
-          <span className="hidden sm:inline">PIDE AHORA</span>
+          <span className="sm:hidden">{navCopy.ctaShort}</span>
+          <span className="hidden sm:inline">{navCopy.ctaLong}</span>
         </a>
       </div>
     </nav>

@@ -1,48 +1,7 @@
 import { business } from '@/config/business'
-
-type EventItem = {
-  dia: string
-  fecha: string
-  tipo: string
-  desc: string
-  hora: string
-  status: 'CONFIRMADO' | 'POR ANUNCIAR'
-}
-
-const events: EventItem[] = [
-  {
-    dia: 'SÁBADO',
-    fecha: '10 MAY',
-    tipo: '🥊 BOX EN VIVO',
-    desc: 'Pelea de campeonato — pantalla grande',
-    hora: '8:00 PM',
-    status: 'CONFIRMADO',
-  },
-  {
-    dia: 'DOMINGO',
-    fecha: '11 MAY',
-    tipo: '⚽ PARTIDO',
-    desc: 'Liga MX — Semifinal',
-    hora: '7:00 PM',
-    status: 'CONFIRMADO',
-  },
-  {
-    dia: 'MARTES',
-    fecha: '13 MAY',
-    tipo: '🍺 NOCHE 2x1',
-    desc: 'Chelas 2x1 toda la noche',
-    hora: '6:00 PM',
-    status: 'CONFIRMADO',
-  },
-  {
-    dia: 'SÁBADO',
-    fecha: '17 MAY',
-    tipo: '🥊 BOX EN VIVO',
-    desc: 'Cartelera por confirmar',
-    hora: '8:00 PM',
-    status: 'POR ANUNCIAR',
-  },
-]
+import { events, type EventItem } from '@/data/events'
+import { eventsCopy } from '@/data/copy'
+import { formatEventWeekday, formatEventDayMonth } from '@/lib/dates'
 
 function StatusBadge({ status }: { status: EventItem['status'] }) {
   const isConfirmed = status === 'CONFIRMADO'
@@ -66,27 +25,27 @@ export default function EventCalendar() {
       <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-8">
         <div className="max-w-3xl">
           <h2 className="font-display text-4xl uppercase tracking-tight text-ink md:text-6xl">
-            ESTA SEMANA EN PACO&apos;S
+            {eventsCopy.heading}
           </h2>
           <div className="mt-4 h-1 w-16 bg-brand-primary" />
           <p className="mt-4 font-body text-sm italic text-ink-muted">
-            Llega antes de las 8PM para asegurar tu lugar
+            {eventsCopy.caption}
           </p>
         </div>
 
         <div className="mt-12 grid gap-5 md:mt-16 md:grid-cols-2">
           {events.map((event) => (
             <article
-              key={`${event.dia}-${event.fecha}-${event.tipo}`}
+              key={`${event.dateISO}-${event.tipo}`}
               className="group rounded-lg border border-brand-primary/20 bg-surface/50 p-6 transition-all duration-300 hover:scale-[1.03] hover:border-brand-primary/60"
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <p className="font-display text-4xl uppercase leading-none tracking-tight text-brand-primary md:text-5xl">
-                    {event.dia}
+                    {formatEventWeekday(event.dateISO)}
                   </p>
                   <p className="mt-1 text-sm uppercase tracking-[0.28em] text-ink-muted">
-                    {event.fecha}
+                    {formatEventDayMonth(event.dateISO)}
                   </p>
                 </div>
 
@@ -117,7 +76,7 @@ export default function EventCalendar() {
             rel="noreferrer noopener"
             className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.22em] text-ink/70 transition-colors hover:text-brand-primary"
           >
-            <span>¿Quieres saber qué viene? Síguenos en Instagram</span>
+            <span>{eventsCopy.instagramCta}</span>
             <span aria-hidden="true">↗</span>
           </a>
         </div>
