@@ -1,3 +1,4 @@
+// Sprint 01 · A0.3: commit trivial para validar el auto-deploy de Vercel.
 import type { Metadata } from 'next'
 import { Bebas_Neue, Inter } from 'next/font/google'
 import './globals.css'
