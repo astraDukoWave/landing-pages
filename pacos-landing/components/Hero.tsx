@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from 'react'
+import { business, formatWeeklyHoursSummary } from '@/config/business'
 
 function useScrollTrigger() {
   const [triggered, setTriggered] = useState(false)
@@ -81,7 +82,7 @@ export default function Hero() {
               className={`${revealClass()} mt-5 max-w-3xl text-sm uppercase tracking-widest text-pacos-white/60 md:text-base`}
               style={{ transitionDelay: '600ms' }}
             >
-              AV. FERROCARRIL 707 · LUN-DOM 1PM–10PM · CERRADO MIÉRCOLES
+              {business.address.street.toUpperCase()} · {formatWeeklyHoursSummary().toUpperCase()}
             </p>
           </div>
         </div>

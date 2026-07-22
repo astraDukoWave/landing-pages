@@ -1,3 +1,5 @@
+import { business, buildWhatsAppHref, copyrightYear, formatWeeklyHoursSummary } from '@/config/business'
+
 export default function Footer() {
   return (
     <footer className="border-t border-pacos-fire/20 bg-pacos-black">
@@ -13,18 +15,19 @@ export default function Footer() {
           <div className="space-y-3 text-sm text-pacos-white/70">
             <p className="flex items-start gap-2">
               <span aria-hidden="true">📍</span>
-              <span>Av. Ferrocarril 707, Cholula</span>
+              <span>
+                {business.address.street}, {business.address.city}
+              </span>
             </p>
             <p className="flex items-start gap-2">
               <span aria-hidden="true">🕒</span>
-              <span>Lun–Mar y Jue–Dom · 1PM–10PM</span>
+              <span>{formatWeeklyHoursSummary()}</span>
             </p>
-            <p className="text-sm italic text-pacos-fire/60">Cerrado miércoles</p>
           </div>
 
           <div className="space-y-4 text-sm">
             <a
-              href="https://wa.me/52XXXXXXXXXX"
+              href={buildWhatsAppHref(business.whatsapp.messages.footer)}
               target="_blank"
               rel="noreferrer noopener"
               className="inline-flex items-center gap-2 font-semibold text-pacos-white transition-colors hover:text-pacos-fire"
@@ -34,19 +37,19 @@ export default function Footer() {
             </a>
 
             <a
-              href="https://instagram.com/pacosbar"
+              href={`https://instagram.com/${business.instagram.handle}`}
               target="_blank"
               rel="noreferrer noopener"
               className="flex items-center gap-2 text-pacos-white/70 transition-colors hover:text-pacos-fire"
             >
               <span aria-hidden="true">📷</span>
-              <span>@pacosbar</span>
+              <span>@{business.instagram.handle}</span>
             </a>
           </div>
         </div>
 
         <p className="mt-12 text-center text-xs text-pacos-white/30">
-          © 2025 Paco&apos;s Wings &amp; Beer · Cholula, Puebla
+          © {copyrightYear} {business.name} · {business.address.city}, {business.address.region}
         </p>
       </div>
     </footer>

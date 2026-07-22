@@ -1,3 +1,5 @@
+import { business, buildWhatsAppHref } from '@/config/business'
+
 type MenuItem = {
   name: string
   badge?: string
@@ -60,7 +62,7 @@ export default function MenuHero() {
 
         <div className="mt-12 flex justify-center md:mt-16">
           <a
-            href="https://wa.me/52XXXXXXXXXX?text=Hola%2C%20quiero%20ver%20el%20men%C3%BA%20completo%20de%20Paco%27s"
+            href={buildWhatsAppHref(business.whatsapp.messages.menu)}
             target="_blank"
             rel="noreferrer noopener"
             className="inline-flex items-center justify-center rounded-full bg-pacos-fire px-6 py-3 text-sm font-bold uppercase tracking-[0.18em] text-black transition-colors hover:bg-pacos-fire-dark"

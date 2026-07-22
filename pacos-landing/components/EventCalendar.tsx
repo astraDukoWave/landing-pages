@@ -1,3 +1,5 @@
+import { business } from '@/config/business'
+
 type EventItem = {
   dia: string
   fecha: string
@@ -110,7 +112,7 @@ export default function EventCalendar() {
 
         <div className="mt-12 border-t border-pacos-white/10 pt-8 md:mt-16">
           <a
-            href="https://instagram.com/pacoswingsandbeer"
+            href={`https://instagram.com/${business.instagram.handle}`}
             target="_blank"
             rel="noreferrer noopener"
             className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.22em] text-pacos-white/70 transition-colors hover:text-pacos-fire"

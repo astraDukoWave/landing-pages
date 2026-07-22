@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from 'react'
+import { business, buildWhatsAppHref } from '@/config/business'
 
 function useScrollTrigger(threshold = 8) {
   const [triggered, setTriggered] = useState(false)
@@ -41,7 +42,7 @@ export default function NavBar() {
         </div>
 
         <a
-          href="https://wa.me/52XXXXXXXXXX"
+          href={buildWhatsAppHref(business.whatsapp.messages.nav)}
           target="_blank"
           rel="noreferrer noopener"
           aria-label="Pide ahora por WhatsApp"
