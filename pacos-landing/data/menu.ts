@@ -1,6 +1,8 @@
 export type MenuItem = {
   name: string
   badge?: string
+  // Sin foto real todavía: el componente cae al gradiente de marca (nunca imagen rota).
+  imageUrl?: string
 }
 
 export const menuItems: MenuItem[] = [

@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { menuItems } from '@/data/menu'
 import { menuCopy } from '@/data/copy'
 import WhatsAppCta from './WhatsAppCta'
@@ -20,16 +21,28 @@ export default function MenuHero() {
             <article key={item.name} className="group">
               <div className="overflow-hidden rounded-2xl bg-gradient-to-br from-brand-primary/40 via-brand-accent/30 to-surface shadow-[0_0_0_1px_theme(colors.brand.primary/16%)]">
                 <div className="relative aspect-[4/3] w-full overflow-hidden">
-                  <div
-                    aria-hidden="true"
-                    className={`absolute inset-0 bg-gradient-to-br from-brand-primary/35 via-surface/15 to-brand-accent/25 transition-transform duration-500 group-hover:scale-105 ${
-                      index % 2 === 0 ? 'from-brand-primary/40' : 'from-brand-accent/35'
-                    }`}
-                  />
-                  <div
-                    aria-hidden="true"
-                    className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.16),_transparent_45%),linear-gradient(to_bottom,rgba(0,0,0,0.08),rgba(0,0,0,0.45))] transition-transform duration-500 group-hover:scale-105"
-                  />
+                  {item.imageUrl ? (
+                    <Image
+                      src={item.imageUrl}
+                      alt={item.name}
+                      fill
+                      sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  ) : (
+                    <>
+                      <div
+                        aria-hidden="true"
+                        className={`absolute inset-0 bg-gradient-to-br from-brand-primary/35 via-surface/15 to-brand-accent/25 transition-transform duration-500 group-hover:scale-105 ${
+                          index % 2 === 0 ? 'from-brand-primary/40' : 'from-brand-accent/35'
+                        }`}
+                      />
+                      <div
+                        aria-hidden="true"
+                        className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.16),_transparent_45%),linear-gradient(to_bottom,rgba(0,0,0,0.08),rgba(0,0,0,0.45))] transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </>
+                  )}
                 </div>
               </div>
 

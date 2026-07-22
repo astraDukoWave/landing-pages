@@ -32,22 +32,11 @@ export const metadata: Metadata = {
     description: business.seo.description,
     url: business.baseUrl,
     type: 'website',
-    images: [
-      {
-        url: 'https://placehold.co/1200x630/0A0A0A/F5F5F5?text=Paco%27s+Wings+%26+Beer',
-        width: 1200,
-        height: 630,
-        alt: business.seo.title,
-      },
-    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: business.seo.title,
     description: business.seo.description,
-    images: [
-      'https://placehold.co/1200x630/0A0A0A/F5F5F5?text=Paco%27s+Wings+%26+Beer',
-    ],
   },
 }
 
