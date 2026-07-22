@@ -53,7 +53,7 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body
-        className={`${bebasNeue.variable} ${inter.variable} bg-pacos-black text-pacos-white font-body`}
+        className={`${bebasNeue.variable} ${inter.variable} bg-surface text-ink font-body`}
       >
         {children}
       </body>

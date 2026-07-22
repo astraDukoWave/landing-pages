@@ -16,13 +16,13 @@ const menuItems: MenuItem[] = [
 
 export default function MenuHero() {
   return (
-    <section className="bg-pacos-black py-20 md:py-28">
+    <section className="bg-surface py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-8">
         <div className="max-w-3xl">
-          <h2 className="font-display text-5xl uppercase tracking-tight text-pacos-white md:text-7xl">
+          <h2 className="font-display text-5xl uppercase tracking-tight text-ink md:text-7xl">
             LO QUE PEDIRÁS
           </h2>
-          <p className="mt-4 font-body italic text-pacos-white/40">
+          <p className="mt-4 font-body italic text-ink/40">
             Cholula nunca olió tan bien
           </p>
         </div>
@@ -30,12 +30,12 @@ export default function MenuHero() {
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {menuItems.map((item, index) => (
             <article key={item.name} className="group">
-              <div className="overflow-hidden rounded-2xl bg-gradient-to-br from-pacos-fire/40 via-pacos-amber/30 to-pacos-black shadow-[0_0_0_1px_rgba(255,69,0,0.16)]">
+              <div className="overflow-hidden rounded-2xl bg-gradient-to-br from-brand-primary/40 via-brand-accent/30 to-surface shadow-[0_0_0_1px_theme(colors.brand.primary/16%)]">
                 <div className="relative aspect-[4/3] w-full overflow-hidden">
                   <div
                     aria-hidden="true"
-                    className={`absolute inset-0 bg-gradient-to-br from-pacos-fire/35 via-pacos-black/15 to-pacos-amber/25 transition-transform duration-500 group-hover:scale-105 ${
-                      index % 2 === 0 ? 'from-pacos-fire/40' : 'from-pacos-amber/35'
+                    className={`absolute inset-0 bg-gradient-to-br from-brand-primary/35 via-surface/15 to-brand-accent/25 transition-transform duration-500 group-hover:scale-105 ${
+                      index % 2 === 0 ? 'from-brand-primary/40' : 'from-brand-accent/35'
                     }`}
                   />
                   <div
@@ -47,12 +47,12 @@ export default function MenuHero() {
 
               <div className="mt-4 space-y-2">
                 {item.badge ? (
-                  <span className="inline-flex rounded-full bg-pacos-fire px-3 py-1 text-[0.7rem] font-bold uppercase tracking-[0.18em] text-black">
+                  <span className="inline-flex rounded-full bg-brand-primary px-3 py-1 text-[0.7rem] font-bold uppercase tracking-[0.18em] text-black">
                     {item.badge}
                   </span>
                 ) : null}
 
-                <h3 className="font-display text-2xl uppercase tracking-tight text-pacos-white md:text-3xl">
+                <h3 className="font-display text-2xl uppercase tracking-tight text-ink md:text-3xl">
                   {item.name}
                 </h3>
               </div>
@@ -65,7 +65,7 @@ export default function MenuHero() {
             href={buildWhatsAppHref(business.whatsapp.messages.menu)}
             target="_blank"
             rel="noreferrer noopener"
-            className="inline-flex items-center justify-center rounded-full bg-pacos-fire px-6 py-3 text-sm font-bold uppercase tracking-[0.18em] text-black transition-colors hover:bg-pacos-fire-dark"
+            className="inline-flex items-center justify-center rounded-full bg-brand-primary px-6 py-3 text-sm font-bold uppercase tracking-[0.18em] text-black transition-colors hover:bg-brand-primary-strong"
           >
             VER MENÚ COMPLETO
           </a>

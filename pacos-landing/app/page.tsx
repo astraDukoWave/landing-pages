@@ -7,7 +7,7 @@ import Footer from '@/components/Footer'
 // Metadata: fuente única en app/layout.tsx (derivada de config/business.ts).
 export default function Home() {
   return (
-    <main className="bg-pacos-black">
+    <main className="bg-surface">
       <NavBar />
       <Hero />
       <EventCalendar />
