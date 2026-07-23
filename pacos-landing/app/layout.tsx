@@ -1,7 +1,9 @@
-// Sprint 01 · A0.3: commit trivial para validar el auto-deploy de Vercel.
 import type { Metadata } from 'next'
 import { Bebas_Neue, Inter } from 'next/font/google'
 import './globals.css'
+import { business } from '@/config/business'
+import { buildLocalBusinessSchema } from '@/lib/schema'
+import DemoNoticeToast from '@/components/DemoNoticeToast'
 
 const bebasNeue = Bebas_Neue({
   subsets: ['latin'],
@@ -16,22 +18,25 @@ const inter = Inter({
   display: 'swap',
 })
 
+// Fuente única de metadata (antes duplicada entre layout.tsx y page.tsx).
 export const metadata: Metadata = {
-  title: "Paco's Wings & Beer — Cholula",
-  description:
-    'Wings. Chela. Cholula. Av. Ferrocarril 707. Transmisiones en vivo, ambiente festivo, lun-mar y jue-dom 1PM-10PM.',
+  metadataBase: new URL(business.baseUrl),
+  title: business.seo.title,
+  description: business.seo.description,
+  keywords: business.seo.keywords.join(', '),
+  alternates: {
+    canonical: business.baseUrl,
+  },
   openGraph: {
-    title: "Paco's Wings & Beer — Cholula",
-    description:
-      'Wings. Chela. Cholula. Av. Ferrocarril 707. Transmisiones en vivo, ambiente festivo, lun-mar y jue-dom 1PM-10PM.',
-    images: [
-      {
-        url: 'https://placehold.co/1200x630/0A0A0A/F5F5F5?text=Paco%27s+Wings+%26+Beer',
-        width: 1200,
-        height: 630,
-        alt: "Paco's Wings & Beer",
-      },
-    ],
+    title: business.seo.title,
+    description: business.seo.description,
+    url: business.baseUrl,
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: business.seo.title,
+    description: business.seo.description,
   },
 }
 
@@ -43,9 +48,15 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body
-        className={`${bebasNeue.variable} ${inter.variable} bg-pacos-black text-pacos-white font-body`}
+        className={`${bebasNeue.variable} ${inter.variable} bg-surface text-ink font-body`}
       >
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(buildLocalBusinessSchema()) }}
+        />
         {children}
+        {business.whatsapp.mode === 'demo' && <DemoNoticeToast />}
       </body>
     </html>
   )
