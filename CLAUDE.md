@@ -4,12 +4,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository shape
 
-This repo is meant to host multiple independent landing-page projects as sibling directories, each with its own `package.json`, `node_modules`, and toolchain. Currently there is one:
+This repo hosts `pacos-landing/` — a Next.js 14 (App Router) site for "Paco's Wings & Beer," a bar/restaurant in Cholula, Puebla, Mexico. All user-facing content is in Spanish. It is meant to host multiple independent landing-page projects as sibling directories in the future, each with its own `package.json`, `node_modules`, and toolchain; currently there is only the one.
 
-- `pacos-landing/` — the actual product: a Next.js 14 (App Router) site for "Paco's Wings & Beer," a bar/restaurant in Cholula, Puebla, Mexico. All user-facing content is in Spanish.
-- Root (`src/`, `package.json`, `tsconfig.json`, `AGENTS.md`) — a bare, unrelated TypeScript scaffold (`main` → `dist/index.js`) with no apparent relationship to `pacos-landing/`. Its disposition (keep vs. remove) is under review as part of an ongoing repo-hygiene pass; don't delete it without an explicit sign-off, and don't confuse it with the landing page work in the meantime.
+There used to be a second, unrelated bare TypeScript scaffold at the repo root (`src/`, `package.json`, `tsconfig.json`, `AGENTS.md`) with no relationship to `pacos-landing/` — leftover from the repo's initial setup, never touched again, no code anywhere referencing it. Its abandonment was verified (`docs/ROOT_SCAFFOLD_INVENTORY.md`), reviewed via `cto-review`, and signed off by Jonathan at CP-3. It was removed from `main` and preserved, unchanged, on the `archive/root-scaffold-pre-sprint1` branch — restore from there if it turns out to be needed.
 
-Always `cd` into the relevant project directory before running commands — the root and `pacos-landing/` are separate npm projects, not a workspace.
+Always `cd` into `pacos-landing/` before running commands.
 
 ## Commands
 
@@ -19,15 +18,9 @@ cd pacos-landing
 npm run dev      # start dev server
 npm run build    # production build
 npm run start    # serve production build
-npm run lint     # next lint — no ESLint config exists yet, so this launches an interactive setup wizard instead of linting (repo-hygiene backlog item)
+npm run lint     # next lint — ESLint configured via eslint-config-next (.eslintrc.json)
 ```
 No test script is defined.
-
-### Root scaffold
-```bash
-npm run build    # tsc compile of src/index.ts -> dist/
-```
-No test or lint scripts are defined at the root; don't invent workflows that aren't present in `package.json`.
 
 ## Architecture (`pacos-landing`)
 
