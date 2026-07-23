@@ -1,19 +1,25 @@
 import type { Metadata } from 'next'
-import { Bebas_Neue, Inter } from 'next/font/google'
+import localFont from 'next/font/local'
 import './globals.css'
 import { business } from '@/config/business'
 import { buildLocalBusinessSchema } from '@/lib/schema'
 import DemoNoticeToast from '@/components/DemoNoticeToast'
 
-const bebasNeue = Bebas_Neue({
-  subsets: ['latin'],
+// Fuentes autohospedadas (Pista C1): el build ya no depende de fonts.googleapis.com.
+const bebasNeue = localFont({
+  src: '../public/fonts/bebas-neue-v16-latin-400.woff2',
   weight: '400',
   variable: '--font-bebas',
   display: 'swap',
 })
 
-const inter = Inter({
-  subsets: ['latin'],
+const inter = localFont({
+  src: [
+    { path: '../public/fonts/inter-v20-latin-400.woff2', weight: '400', style: 'normal' },
+    { path: '../public/fonts/inter-v20-latin-500.woff2', weight: '500', style: 'normal' },
+    { path: '../public/fonts/inter-v20-latin-600.woff2', weight: '600', style: 'normal' },
+    { path: '../public/fonts/inter-v20-latin-700.woff2', weight: '700', style: 'normal' },
+  ],
   variable: '--font-inter',
   display: 'swap',
 })
