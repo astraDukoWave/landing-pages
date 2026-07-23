@@ -10,7 +10,10 @@ yarn-error.log*
 .pnp.js
 
 .next/
+*.tsbuildinfo
 
 .DS_Store
 
 .vscode/*
+
+.idea/
