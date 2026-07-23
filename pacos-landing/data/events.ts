@@ -1,3 +1,5 @@
+import { validateEvents } from '@/lib/validateEvents'
+
 export type EventStatus = 'CONFIRMADO' | 'POR ANUNCIAR'
 
 export type EventItem = {
@@ -12,3 +14,5 @@ export type EventItem = {
 // al estado vacío diseñado (lib/events.ts + EmptyEventsState) — demo válido por
 // spec. Jonathan agrega eventos aquí según el flujo gestionado (ver CLAUDE.md).
 export const events: EventItem[] = []
+
+validateEvents(events)
