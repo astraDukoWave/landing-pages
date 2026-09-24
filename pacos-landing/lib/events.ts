@@ -2,7 +2,7 @@ import { events as allEvents, type EventItem } from '@/data/events'
 import { isPastDate } from './dates'
 
 /**
- * Filtra eventos con fecha pasada en build. Nunca llega un evento vencido a la URL pública.
+ * Filtra por fecha local en cada render de la ruta dinámica.
  */
 export function getUpcomingEvents(
   events: EventItem[] = allEvents,

@@ -1,4 +1,6 @@
 import { ImageResponse } from 'next/og'
+import { business } from '@/config/business'
+import { theme } from '@/config/theme'
 
 export const size = { width: 180, height: 180 }
 export const contentType = 'image/png'
@@ -13,13 +15,13 @@ export default function AppleIcon() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: '#FF4500',
-          color: '#0A0A0A',
+          backgroundColor: theme.primary,
+          color: theme.surface,
           fontSize: 108,
           fontWeight: 800,
         }}
       >
-        P
+        {business.shortName.charAt(0)}
       </div>
     ),
     { ...size }

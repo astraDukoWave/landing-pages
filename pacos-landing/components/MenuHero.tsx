@@ -1,74 +1,39 @@
-import Image from 'next/image'
-import { menuItems } from '@/data/menu'
-import { menuCopy } from '@/data/copy'
+"use client"
+
+import { useState } from 'react'
+import { business } from '@/config/business'
+import { menuCategories, menuItems } from '@/data/menu'
+import { demoCopy, menuCopy } from '@/data/copy'
 import WhatsAppCta from './WhatsAppCta'
 
 export default function MenuHero() {
+  const [category, setCategory] = useState('all')
+  const visible = menuItems.filter(item => category === 'all' || item.category === category)
   return (
-    <section className="bg-surface py-20 md:py-28">
-      <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-8">
-        <div className="max-w-3xl">
-          <h2 className="font-display text-5xl uppercase tracking-tight text-ink md:text-7xl">
-            {menuCopy.heading}
-          </h2>
-          <p className="mt-4 font-body italic text-ink/40">
-            {menuCopy.caption}
-          </p>
+    <section id="menu" className="border-y border-ink/15 bg-surface-elevated py-16 md:py-24">
+      <div className="shell">
+        <p className="eyebrow">{menuCopy.eyebrow}</p>
+        <h2 className="section-title mt-4">{menuCopy.heading}</h2>
+        <p className="mt-4 text-ink-muted">{menuCopy.caption}</p>
+        {business.demo && <p className="mt-5 max-w-2xl border-l-2 border-brand-primary pl-4 text-sm leading-relaxed text-ink-muted">{demoCopy.menuNote}</p>}
+        <div aria-label={menuCopy.filterLabel} role="group" className="mt-8 flex flex-wrap gap-2">
+          {[{ id: 'all', label: menuCopy.all }, ...menuCategories].map(item => (
+            <button key={item.id} type="button" aria-pressed={category === item.id} onClick={() => setCategory(item.id)} className={`min-h-11 rounded-full border px-4 py-2 text-sm transition-colors ${category === item.id ? 'border-brand-primary bg-brand-primary text-surface' : 'border-ink/25 text-ink hover:border-brand-primary'}`}>{item.label}</button>
+          ))}
         </div>
-
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {menuItems.map((item, index) => (
-            <article key={item.name} className="group">
-              <div className="overflow-hidden rounded-2xl bg-gradient-to-br from-brand-primary/40 via-brand-accent/30 to-surface shadow-[0_0_0_1px_theme(colors.brand.primary/16%)]">
-                <div className="relative aspect-[4/3] w-full overflow-hidden">
-                  {item.imageUrl ? (
-                    <Image
-                      src={item.imageUrl}
-                      alt={item.name}
-                      fill
-                      sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                  ) : (
-                    <>
-                      <div
-                        aria-hidden="true"
-                        className={`absolute inset-0 bg-gradient-to-br from-brand-primary/35 via-surface/15 to-brand-accent/25 transition-transform duration-500 group-hover:scale-105 ${
-                          index % 2 === 0 ? 'from-brand-primary/40' : 'from-brand-accent/35'
-                        }`}
-                      />
-                      <div
-                        aria-hidden="true"
-                        className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.16),_transparent_45%),linear-gradient(to_bottom,rgba(0,0,0,0.08),rgba(0,0,0,0.45))] transition-transform duration-500 group-hover:scale-105"
-                      />
-                    </>
-                  )}
-                </div>
+        <p role="status" aria-live="polite" className="mt-6 text-xs uppercase tracking-widest text-ink-muted">{visible.length} {menuCopy.count}</p>
+        <div className="mt-2 grid gap-x-10 md:grid-cols-2">
+          {visible.map(item => (
+            <article key={item.id} className="border-b border-ink/20 py-7">
+              <div className="flex flex-wrap items-baseline justify-between gap-2">
+                <h3 className="font-display text-3xl tracking-wide">{item.name}</h3>
+                <span className="text-xs text-brand-primary">{item.price !== undefined ? new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(item.price) : demoCopy.pricePending}</span>
               </div>
-
-              <div className="mt-4 space-y-2">
-                {item.badge ? (
-                  <span className="inline-flex rounded-full bg-brand-primary px-3 py-1 text-[0.7rem] font-bold uppercase tracking-[0.18em] text-black">
-                    {item.badge}
-                  </span>
-                ) : null}
-
-                <h3 className="font-display text-2xl uppercase tracking-tight text-ink md:text-3xl">
-                  {item.name}
-                </h3>
-              </div>
+              <p className="mt-3 max-w-md text-sm leading-relaxed text-ink-muted">{item.description}</p>
             </article>
           ))}
         </div>
-
-        <div className="mt-12 flex justify-center md:mt-16">
-          <WhatsAppCta
-            context="menu"
-            className="inline-flex items-center justify-center rounded-full bg-brand-primary px-6 py-3 text-sm font-bold uppercase tracking-[0.18em] text-black transition-colors hover:bg-brand-primary-strong"
-          >
-            {menuCopy.ctaLabel}
-          </WhatsAppCta>
-        </div>
+        <div className="mt-9"><WhatsAppCta context="menu" className="button-secondary">{menuCopy.contact} <span aria-hidden="true">↗</span></WhatsAppCta></div>
       </div>
     </section>
   )

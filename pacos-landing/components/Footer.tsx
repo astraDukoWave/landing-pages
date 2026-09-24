@@ -1,56 +1,13 @@
-import { business, copyrightYear, formatWeeklyHoursSummary } from '@/config/business'
-import { footerCopy } from '@/data/copy'
-import WhatsAppCta from './WhatsAppCta'
+import { business, copyrightYear } from '@/config/business'
+import { demoCopy, footerCopy } from '@/data/copy'
 
 export default function Footer() {
   return (
-    <footer className="border-t border-brand-primary/20 bg-surface">
-      <div className="mx-auto max-w-7xl px-6 py-14 sm:px-10 lg:px-8">
-        <div className="grid gap-10 md:grid-cols-3">
-          <div>
-            <p className="font-display text-4xl uppercase leading-none tracking-tight text-ink">
-              PACO&apos;S
-            </p>
-            <p className="mt-2 text-sm text-ink-muted">Wings &amp; Beer</p>
-          </div>
-
-          <div className="space-y-3 text-sm text-ink/70">
-            <p className="flex items-start gap-2">
-              <span aria-hidden="true">📍</span>
-              <span>
-                {business.address.street}, {business.address.city}
-              </span>
-            </p>
-            <p className="flex items-start gap-2">
-              <span aria-hidden="true">🕒</span>
-              <span>{formatWeeklyHoursSummary()}</span>
-            </p>
-          </div>
-
-          <div className="space-y-4 text-sm">
-            <WhatsAppCta
-              context="footer"
-              className="inline-flex items-center gap-2 font-semibold text-ink transition-colors hover:text-brand-primary"
-            >
-              <span aria-hidden="true">💬</span>
-              <span>{footerCopy.whatsappLabel}</span>
-            </WhatsAppCta>
-
-            <a
-              href={`https://instagram.com/${business.instagram.handle}`}
-              target="_blank"
-              rel="noreferrer noopener"
-              className="flex items-center gap-2 text-ink/70 transition-colors hover:text-brand-primary"
-            >
-              <span aria-hidden="true">📷</span>
-              <span>@{business.instagram.handle}</span>
-            </a>
-          </div>
-        </div>
-
-        <p className="mt-12 text-center text-xs text-ink/30">
-          © {copyrightYear} {business.name} · {business.address.city}, {business.address.region}
-        </p>
+    <footer className="border-t border-ink/20 py-9">
+      <div className="shell flex flex-wrap items-center justify-between gap-6">
+        <div><p className="font-display text-3xl text-brand-primary">{business.shortName}</p><p className="mt-2 text-xs text-ink-muted">© {copyrightYear} · {business.demo ? footerCopy.demo : business.name}</p></div>
+        <div className="text-sm text-ink-muted">{business.instagram.confirmed ? <a href={`https://instagram.com/${business.instagram.handle}`} target="_blank" rel="noopener noreferrer">{footerCopy.social} ↗</a> : <p>{demoCopy.socialPending}</p>}</div>
+        <a href="#inicio" className="py-3 text-sm underline underline-offset-4">{footerCopy.back} ↑</a>
       </div>
     </footer>
   )

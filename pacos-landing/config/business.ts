@@ -24,6 +24,10 @@ export type WhatsAppConfig = {
 export type BusinessConfig = {
   name: string
   shortName: string
+  subtitle: string
+  demo: boolean
+  showEvents: boolean
+  timeZone: string
   tagline: string
   address: {
     street: string
@@ -48,6 +52,10 @@ export type BusinessConfig = {
 export const business: BusinessConfig = {
   name: "Paco's Wings & Beer",
   shortName: "Paco's",
+  subtitle: 'Wings & Beer',
+  demo: true,
+  showEvents: true,
+  timeZone: 'America/Mexico_City',
   tagline: 'Wings. Chela. Cholula.',
   address: {
     street: 'Av. Ferrocarril 707',
@@ -71,7 +79,7 @@ export const business: BusinessConfig = {
     mode: 'demo',
     activeNumber: null,
     messages: {
-      nav: 'Hola, quiero pedir ahora 🍗',
+      nav: 'Hola, me gustaría consultar el menú y la disponibilidad.',
       menu: 'Hola, quiero ver el menú completo de Paco’s',
       footer: 'Hola, quiero más información de Paco’s Wings & Beer',
       default: 'Hola, quiero más información de Paco’s Wings & Beer',
@@ -87,7 +95,7 @@ export const business: BusinessConfig = {
   seo: {
     title: "Paco's Wings & Beer — Cholula",
     description:
-      'Wings, chelas frías y transmisiones en vivo de peleas y partidos. Encuentra el mejor bar deportivo en Cholula.',
+      'Propuesta de sitio: explora un menú de muestra, ubicación y contacto. Contenido pendiente de confirmar con el negocio.',
     keywords: [
       'bar',
       'Cholula',
@@ -112,56 +120,25 @@ const DAY_LABELS: { key: keyof WeeklyHours; label: string }[] = [
   { key: 'sunday', label: 'Dom' },
 ]
 
-function formatHourLabel(hours: DayHours): string {
-  if (!hours) return 'Cerrado'
-  const [openH] = hours.open.split(':').map(Number)
-  const [closeH] = hours.close.split(':').map(Number)
-  const fmt = (h: number) => {
-    const period = h >= 12 ? 'PM' : 'AM'
-    const twelveHour = h % 12 === 0 ? 12 : h % 12
-    return `${twelveHour}${period}`
-  }
-  return `${fmt(openH)}–${fmt(closeH)}`
-}
-
-/**
- * Colapsa días consecutivos con el mismo horario en rangos ("Lun–Mar y Jue–Dom · 1PM–10PM").
- * Única fuente del texto de horarios: Hero y Footer llaman a esta función, nunca escriben el string a mano.
- */
 export function formatWeeklyHoursSummary(hours: WeeklyHours = business.hours): string {
-  const groups: { label: string; hours: DayHours }[] = []
-
+  const groups: { labels: string[]; hours: DayHours }[] = []
   for (const { key, label } of DAY_LABELS) {
-    const dayHours = hours[key]
-    const last = groups[groups.length - 1]
-    const sameAsLast =
-      last &&
-      ((last.hours === null && dayHours === null) ||
-        (last.hours &&
-          dayHours &&
-          last.hours.open === dayHours.open &&
-          last.hours.close === dayHours.close))
-
-    if (sameAsLast) {
-      last.label = `${last.label.split('–')[0]}–${label}`
-    } else {
-      groups.push({ label, hours: dayHours })
-    }
+    const value = hours[key]
+    const previous = groups[groups.length - 1]
+    if (previous && JSON.stringify(previous.hours) === JSON.stringify(value)) {
+      previous.labels.push(label)
+    } else groups.push({ labels: [label], hours: value })
   }
-
-  const openGroups = groups.filter((g) => g.hours !== null)
-  const closedGroups = groups.filter((g) => g.hours === null)
-
-  const openPart = openGroups
-    .map((g) => g.label)
-    .join(' y ')
-  const hoursLabel = openGroups[0] ? formatHourLabel(openGroups[0].hours) : ''
-  const closedPart = closedGroups.map((g) => `Cerrado ${g.label}`).join(', ')
-
-  return [openPart && `${openPart} · ${hoursLabel}`, closedPart]
-    .filter(Boolean)
-    .join(' · ')
+  return groups.map(({ labels, hours }) => {
+    const days = labels.length > 1 ? `${labels[0]}–${labels[labels.length - 1]}` : labels[0]
+    return `${days} ${hours ? `${hours.open}–${hours.close}` : 'cerrado'}`
+  }).join(' · ')
 }
+
+export const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+  [business.address.street, business.address.city, business.address.region, business.address.country].join(', ')
+)}`
+export const siteTitle = `${business.demo ? 'Propuesta · ' : ''}${business.seo.title}`
 
 export function buildWhatsAppHref(message?: string): string {
   if (business.whatsapp.mode !== 'number' || !business.whatsapp.activeNumber) {

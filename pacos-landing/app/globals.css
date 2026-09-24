@@ -1,3 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; scroll-padding-top: 6.5rem; }
+  body { margin: 0; }
+  ::selection { @apply bg-brand-primary text-surface; }
+  :focus-visible { @apply outline outline-2 outline-offset-4 outline-brand-primary; }
+  button, a { -webkit-tap-highlight-color: transparent; }
+}
+@layer components {
+  .shell { @apply mx-auto w-full max-w-7xl px-6 sm:px-10 lg:px-16; }
+  .eyebrow { @apply text-xs font-semibold uppercase tracking-[0.18em] text-brand-primary; }
+  .section-title { @apply font-display text-5xl leading-[0.95] tracking-tight sm:text-6xl; }
+  .button-primary { @apply inline-flex min-h-11 items-center justify-center gap-3 rounded-full bg-brand-primary px-5 py-3 text-sm font-semibold text-surface transition-colors hover:bg-brand-primary-strong; }
+  .button-secondary { @apply inline-flex min-h-11 items-center justify-center gap-3 rounded-full border border-ink/35 px-5 py-3 text-sm font-semibold text-ink transition-colors hover:border-brand-primary hover:text-brand-primary; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

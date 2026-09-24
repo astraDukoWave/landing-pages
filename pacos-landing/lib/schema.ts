@@ -44,7 +44,7 @@ export function buildLocalBusinessSchema() {
       addressCountry: 'MX',
     },
     openingHoursSpecification: buildOpeningHoursSpecification(),
-    sameAs: [`https://instagram.com/${business.instagram.handle}`],
+    ...(business.instagram.confirmed ? { sameAs: [`https://instagram.com/${business.instagram.handle}`] } : {}),
   }
 
   if (business.whatsapp.mode === 'number' && business.whatsapp.activeNumber) {

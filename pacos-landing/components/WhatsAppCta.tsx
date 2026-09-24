@@ -1,49 +1,26 @@
 "use client"
 
-import type { ReactNode, MouseEvent } from 'react'
+import { useId, useRef } from 'react'
+import type { ReactNode } from 'react'
 import { business, buildWhatsAppHref, type WhatsAppContext } from '@/config/business'
+import { demoCopy } from '@/data/copy'
 
-export const DEMO_NOTICE_EVENT = 'pacos:whatsapp-demo-notice'
-
-type WhatsAppCtaProps = {
-  context: WhatsAppContext
-  className?: string
-  ariaLabel?: string
-  children: ReactNode
-}
-
-/**
- * Único punto de render para los CTAs de WhatsApp. En modo 'demo' conserva la UX
- * completa (visible, con su mensaje) pero intercepta el click y dispara el aviso
- * de demostración en vez de navegar — la URL pública nunca abre un chat real.
- */
-export default function WhatsAppCta({
-  context,
-  className,
-  ariaLabel,
-  children,
-}: WhatsAppCtaProps) {
+type Props = { context: WhatsAppContext; className?: string; ariaLabel?: string; children: ReactNode }
+export default function WhatsAppCta({ context, className, ariaLabel, children }: Props) {
+  const dialog = useRef<HTMLDialogElement>(null)
+  const id = useId()
   const message = business.whatsapp.messages[context] ?? business.whatsapp.messages.default
-  const href = buildWhatsAppHref(message)
-  const isDemo = business.whatsapp.mode === 'demo'
-
-  const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
-    if (isDemo) {
-      event.preventDefault()
-      window.dispatchEvent(new CustomEvent(DEMO_NOTICE_EVENT))
-    }
+  if (!business.demo && business.whatsapp.mode === 'number' && business.whatsapp.activeNumber) {
+    return <a href={buildWhatsAppHref(message)} target="_blank" rel="noopener noreferrer" aria-label={ariaLabel} className={className}>{children}</a>
   }
-
-  return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noreferrer noopener"
-      aria-label={ariaLabel}
-      onClick={handleClick}
-      className={className}
-    >
-      {children}
-    </a>
-  )
+  return <>
+    <button type="button" aria-label={ariaLabel} aria-haspopup="dialog" className={className} onClick={() => dialog.current?.showModal()}>{children}</button>
+    <dialog ref={dialog} aria-labelledby={`${id}-title`} aria-describedby={`${id}-body`} className="w-[calc(100%-2rem)] max-w-lg rounded-xl border border-ink/20 bg-surface-elevated p-6 text-ink shadow-2xl backdrop:bg-black/75 sm:p-8">
+      <h2 id={`${id}-title`} className="font-display text-3xl">{demoCopy.contactTitle}</h2>
+      <p id={`${id}-body`} className="mt-4 text-sm leading-relaxed text-ink-muted">{demoCopy.contactBody}</p>
+      <p className="eyebrow mt-6">{demoCopy.messageLabel}</p>
+      <blockquote className="mt-3 border-l-2 border-brand-primary pl-4 text-sm leading-relaxed">{message}</blockquote>
+      <form method="dialog" className="mt-7"><button className="button-primary">{demoCopy.close}</button></form>
+    </dialog>
+  </>
 }

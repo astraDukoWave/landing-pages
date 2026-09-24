@@ -1,56 +1,21 @@
-"use client"
-
-import { useEffect, useState } from 'react'
+import { business } from '@/config/business'
 import { navCopy } from '@/data/copy'
 import WhatsAppCta from './WhatsAppCta'
 
-function useScrollTrigger(threshold = 8) {
-  const [triggered, setTriggered] = useState(false)
-
-  useEffect(() => {
-    const updateTrigger = () => {
-      setTriggered(window.scrollY > threshold)
-    }
-
-    updateTrigger()
-    window.addEventListener('scroll', updateTrigger, { passive: true })
-
-    return () => {
-      window.removeEventListener('scroll', updateTrigger)
-    }
-  }, [threshold])
-
-  return triggered
-}
-
 export default function NavBar() {
-  const hasShadow = useScrollTrigger()
-
   return (
-    <nav
-      className={`fixed top-0 z-50 h-14 w-full bg-surface/95 backdrop-blur-sm transition-shadow duration-300 md:h-16 ${
-        hasShadow ? 'shadow-[0_10px_30px_rgba(0,0,0,0.35)]' : 'shadow-none'
-      }`}
-    >
-      <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col leading-none">
-          <span className="font-display text-[1.9rem] uppercase tracking-[0.08em] text-brand-primary sm:text-[2.15rem]">
-            PACO&apos;S
-          </span>
-          <span className="-mt-1 text-[0.55rem] font-medium uppercase tracking-[0.32em] text-ink-muted sm:text-[0.62rem]">
-            WINGS &amp; BEER
-          </span>
+    <header className="sticky top-0 z-40 border-b border-ink/15 bg-surface/95 backdrop-blur-md">
+      <nav aria-label={navCopy.label} className="shell flex min-h-20 items-center justify-between gap-3 py-3">
+        <a href="#inicio" aria-label={navCopy.home} className="shrink-0">
+          <span className="block font-display text-3xl leading-none tracking-wide text-brand-primary sm:text-4xl">{business.shortName}</span>
+          <span className="text-[0.6rem] uppercase tracking-[0.2em] text-ink-muted">{business.subtitle}</span>
+        </a>
+        <div className="flex items-center gap-3 text-xs font-semibold sm:gap-7 sm:text-sm">
+          <a className="py-3 hover:text-brand-primary" href="#menu">{navCopy.menu}</a>
+          <a className="hidden py-3 hover:text-brand-primary sm:block" href="#visitanos">{navCopy.visit}</a>
+          <WhatsAppCta context="nav" className="button-primary">{navCopy.contact}</WhatsAppCta>
         </div>
-
-        <WhatsAppCta
-          context="nav"
-          ariaLabel="Pide ahora por WhatsApp"
-          className="inline-flex items-center justify-center rounded-full bg-brand-primary px-4 py-2 text-sm font-bold text-black transition-all duration-300 hover:bg-brand-primary-strong hover:shadow-[0_0_20px_theme(colors.brand.primary/40%)] sm:px-5 sm:text-base"
-        >
-          <span className="sm:hidden">{navCopy.ctaShort}</span>
-          <span className="hidden sm:inline">{navCopy.ctaLong}</span>
-        </WhatsAppCta>
-      </div>
-    </nav>
+      </nav>
+    </header>
   )
 }
