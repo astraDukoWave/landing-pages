@@ -38,7 +38,8 @@ export function buildLocalBusinessSchema() {
     url: business.baseUrl,
     address: {
       '@type': 'PostalAddress',
-      streetAddress: business.address.street,
+      streetAddress: [business.address.street, business.address.neighborhood].filter(Boolean).join(', '),
+      postalCode: business.address.postalCode,
       addressLocality: business.address.city,
       addressRegion: business.address.region,
       addressCountry: 'MX',

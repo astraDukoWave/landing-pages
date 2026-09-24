@@ -19,6 +19,7 @@ const config: Config = {
         // Capa semántica: lo único que components/ debe usar para identidad y estado.
         brand: {
           primary: theme.primary,
+          onPrimary: theme.onPrimary,
           'primary-strong': theme.primaryStrong,
           accent: theme.accent,
         },

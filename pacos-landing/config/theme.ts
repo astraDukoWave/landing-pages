@@ -1,5 +1,5 @@
-// Identidad compartida por Tailwind, iconos y vista previa social.
+// Paleta basada en el logo suministrado; acento claro para texto sobre negro.
 export const theme = {
-  primary: '#FF8B51', primaryStrong: '#FFA675', accent: '#FF8C00',
-  surface: '#171713', elevated: '#20201B', ink: '#F4EEDC', muted: '#BCB9AD',
+  primary: '#D71920', primaryStrong: '#BA151B', accent: '#FF7378', onPrimary: '#FFFFFF',
+  surface: '#101010', elevated: '#1B1B1B', ink: '#FAFAFA', muted: '#BDBDBD',
 } as const

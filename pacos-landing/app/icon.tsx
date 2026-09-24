@@ -17,7 +17,7 @@ export default function Icon() {
           justifyContent: 'center',
           backgroundColor: theme.primary,
           borderRadius: 6,
-          color: theme.surface,
+          color: theme.onPrimary,
           fontSize: 22,
           fontWeight: 800,
         }}

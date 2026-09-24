@@ -5,7 +5,7 @@ export const demoCopy = {
   contactBody: 'En el sitio definitivo, este botón abrirá el WhatsApp del negocio con tu mensaje listo. Esta demostración no envía mensajes.',
   messageLabel: 'Ejemplo de mensaje',
   close: 'Entendido',
-  provisional: 'Dirección y horarios de referencia. Confírmalos con el negocio antes de visitarlo.',
+  provisional: 'Ubicación proporcionada para esta propuesta. Los horarios siguen pendientes de confirmación con el negocio.',
   menuNote: 'Menú ilustrativo. Productos, descripciones y precios se confirmarán con el negocio.',
   pricePending: 'Precio por confirmar',
   socialPending: 'Perfil social pendiente de confirmación.',

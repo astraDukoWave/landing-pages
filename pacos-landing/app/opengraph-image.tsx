@@ -27,7 +27,7 @@ export default async function OpengraphImage() {
             fontSize: 148,
             fontWeight: 800,
             letterSpacing: '-0.02em',
-            color: theme.primary,
+            color: theme.accent,
             lineHeight: 1,
           }}
         >

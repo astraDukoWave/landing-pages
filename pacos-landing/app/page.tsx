@@ -11,7 +11,7 @@ import Footer from '@/components/Footer'
 export const dynamic = 'force-dynamic'
 export default function Home() {
   return <>
-    {business.demo && <aside className="border-b border-ink/15 bg-surface-elevated px-5 py-3 text-center text-xs leading-relaxed"><p className="font-semibold text-brand-primary">{demoCopy.banner}</p><p className="mt-1 text-ink-muted">{demoCopy.detail}</p></aside>}
+    {business.demo && <aside className="border-b border-ink/15 bg-surface-elevated px-5 py-3 text-center text-xs leading-relaxed"><p className="font-semibold text-brand-accent">{demoCopy.banner}</p><p className="mt-1 text-ink-muted">{demoCopy.detail}</p></aside>}
     <NavBar />
     <main id="contenido"><Hero /><MenuHero />{business.showEvents && <EventCalendar />}<Visit /></main>
     <Footer />

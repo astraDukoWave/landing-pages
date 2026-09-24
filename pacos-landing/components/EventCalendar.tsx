@@ -50,7 +50,7 @@ export default function EventCalendar() {
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div>
-                      <p className="font-display text-4xl uppercase leading-none tracking-tight text-brand-primary md:text-5xl">
+                      <p className="font-display text-4xl uppercase leading-none tracking-tight text-brand-accent md:text-5xl">
                         {formatEventWeekday(event.dateISO)}
                       </p>
                       <p className="mt-1 text-sm uppercase tracking-[0.28em] text-ink-muted">
@@ -83,7 +83,7 @@ export default function EventCalendar() {
                 href={`https://instagram.com/${business.instagram.handle}`}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.22em] text-ink/70 transition-colors hover:text-brand-primary"
+                className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.22em] text-ink/70 transition-colors hover:text-brand-accent"
               >
                 <span>{eventsCopy.instagramCta}</span>
                 <span aria-hidden="true">↗</span>

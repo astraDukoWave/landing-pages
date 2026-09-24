@@ -36,3 +36,14 @@ conversión comercial. Ninguna métrica comercial se infiere de una revisión t�
 Implementación y verificación realizadas. Pendiente: revisión visual del usuario y
 aprobación de merge/publicación según CP-2. Fotos, precios, identidad y datos oficiales
 continúan en el gate posterior a contratación. Valhalla permanece fuera del alcance.
+
+
+## Revisión de identidad y ubicación — 2026-09-24
+El usuario corrige dirección a Ferrocarril 707, Centro, 72750 San Andrés Cholula,
+Puebla y proporciona el pin https://maps.app.goo.gl/W6WF4REVtPAsD1xaA. Se usa el
+enlace exacto en lugar de búsqueda ambigua. Instagram confirmado por usuario:
+https://www.instagram.com/pacoscholula/. Logo JPG de 150×150 suministrado por el
+usuario para este demo: se conserva original y se muestra pequeño, sin ampliación
+ni recreación. Paleta roja/negra/blanca; texto blanco sobre botones rojos y acento
+rojo claro sobre fondos oscuros. La existencia o propiedad de un Perfil de Empresa
+no está verificada; no se afirma su ausencia ni se crea/reclama una ficha.

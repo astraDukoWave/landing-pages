@@ -24,6 +24,8 @@ export type WhatsAppConfig = {
 export type BusinessConfig = {
   name: string
   shortName: string
+  logoSrc?: string
+  mapsUrl?: string
   subtitle: string
   demo: boolean
   showEvents: boolean
@@ -31,6 +33,8 @@ export type BusinessConfig = {
   tagline: string
   address: {
     street: string
+    neighborhood?: string
+    postalCode?: string
     city: string
     region: string
     country: string
@@ -53,13 +57,17 @@ export const business: BusinessConfig = {
   name: "Paco's Wings & Beer",
   shortName: "Paco's",
   subtitle: 'Wings & Beer',
+  logoSrc: '/brand/logo-pacos.jpg',
+  mapsUrl: 'https://maps.app.goo.gl/W6WF4REVtPAsD1xaA',
   demo: true,
   showEvents: true,
   timeZone: 'America/Mexico_City',
   tagline: 'Wings. Chela. Cholula.',
   address: {
-    street: 'Av. Ferrocarril 707',
-    city: 'Cholula',
+    street: 'Ferrocarril 707',
+    neighborhood: 'Centro',
+    postalCode: '72750',
+    city: 'San Andrés Cholula',
     region: 'Puebla',
     country: 'México',
   },
@@ -86,10 +94,9 @@ export const business: BusinessConfig = {
     },
   },
   instagram: {
-    handle: 'pacoswingsandbeer',
-    // Q3: handle único del demo, marcado pendiente de confirmación del cliente
-    // (cierra en Gate Producción).
-    confirmed: false,
+    handle: 'pacoscholula',
+    // Perfil proporcionado por el usuario en la revisión del 2026-09-24.
+    confirmed: true,
   },
   baseUrl: 'https://landing-pages-blond-eight.vercel.app',
   seo: {
@@ -135,7 +142,7 @@ export function formatWeeklyHoursSummary(hours: WeeklyHours = business.hours): s
   }).join(' · ')
 }
 
-export const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+export const mapsHref = business.mapsUrl || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
   [business.address.street, business.address.city, business.address.region, business.address.country].join(', ')
 )}`
 export const siteTitle = `${business.demo ? 'Propuesta · ' : ''}${business.seo.title}`
