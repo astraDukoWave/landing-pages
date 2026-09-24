@@ -12,4 +12,27 @@ Fuente: docs/specs/RESTAURANT_DEMO_COMMERCIAL_SPEC_v1.0.md.
    siguiendo CP-2 del plan anterior. No se reabren checkpoints del scaffold ya cerrado.
 
 ## Verificación
-Pendiente de ejecución. Ninguna métrica comercial se infiere de una revisión técnica.
+Verificado 2026-09-24 en build local y preview de Vercel.
+
+| Criterios | Resultado | Evidencia |
+| --- | --- | --- |
+| C01–C03 | PASS | Propuesta visible; menú de seis entradas, filtro Bebidas muestra una opción; reset muestra seis. |
+| C04 | PASS | Tres contextos de contacto muestran mensajes diferentes; Escape cierra y devuelve foco a Contacto; sin wa.me en HTML de demo. |
+| C05 | PASS | Mapa codifica dirección de config; información provisional visible; sin enlace Instagram no confirmado. |
+| C06 | PASS | HTTP 200; metadata noindex/nofollow; sin JSON-LD; robots rastreable y sitemap XML sin URLs. |
+| C07 | PASS | Config de datos y paleta compartida con OG/iconos; guía de adaptación actualizada. |
+| C08 | PASS | Fecha local antes/después de medianoche comprobada; horarios con minutos y domingo distinto conservados; cartelera sin eventos muestra estado vacío. |
+| C09 | PASS con límites | Marcos de navegador de 360/768/1280 px (área útil 345/753/1265 por scrollbar): scrollWidth=clientWidth en los tres. Capturas de móvil/tableta/escritorio revisadas; diálogo móvil sin overflow; cierre con Escape. No es prueba en dispositivos físicos ni certificación de accesibilidad. |
+| C10 | PASS | npm run build, tipos y npm run lint sin errores. Vercel preview READY. PR #2. |
+
+La página responsive-check.html usada temporalmente para QA se retira antes del
+merge. La revisión funcional se realizó sobre la UI del commit b51c45f; el commit
+final solo retira ese harness y registra evidencia. Los logs observados del navegador
+incluyen errores de una extensión de revisión (chrome-extension), no del sitio.
+No se observaron overlays de error de la aplicación. No se midió Lighthouse ni
+conversión comercial. Ninguna métrica comercial se infiere de una revisión técnica.
+
+## Cierre
+Implementación y verificación realizadas. Pendiente: revisión visual del usuario y
+aprobación de merge/publicación según CP-2. Fotos, precios, identidad y datos oficiales
+continúan en el gate posterior a contratación. Valhalla permanece fuera del alcance.
