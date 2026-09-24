@@ -21,7 +21,7 @@ export default function MenuHero() {
             <button key={item.id} type="button" aria-pressed={category === item.id} onClick={() => setCategory(item.id)} className={`min-h-11 rounded-full border px-4 py-2 text-sm transition-colors ${category === item.id ? 'border-brand-primary bg-brand-primary text-surface' : 'border-ink/25 text-ink hover:border-brand-primary'}`}>{item.label}</button>
           ))}
         </div>
-        <p role="status" aria-live="polite" className="mt-6 text-xs uppercase tracking-widest text-ink-muted">{visible.length} {menuCopy.count}</p>
+        <p role="status" aria-live="polite" className="mt-6 text-xs uppercase tracking-widest text-ink-muted">{visible.length} {visible.length === 1 ? menuCopy.countOne : menuCopy.count}</p>
         <div className="mt-2 grid gap-x-10 md:grid-cols-2">
           {visible.map(item => (
             <article key={item.id} className="border-b border-ink/20 py-7">

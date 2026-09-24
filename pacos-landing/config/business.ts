@@ -80,7 +80,7 @@ export const business: BusinessConfig = {
     activeNumber: null,
     messages: {
       nav: 'Hola, me gustaría consultar el menú y la disponibilidad.',
-      menu: 'Hola, quiero ver el menú completo de Paco’s',
+      menu: 'Hola, tengo una consulta sobre el menú.',
       footer: 'Hola, quiero más información de Paco’s Wings & Beer',
       default: 'Hola, quiero más información de Paco’s Wings & Beer',
     },

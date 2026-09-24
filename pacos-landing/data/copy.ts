@@ -28,7 +28,7 @@ COMPAÑÍA.`,
 export const menuCopy = {
   eyebrow: '01 / A tu antojo', heading: 'La carta, a un toque.',
   caption: 'Elige una categoría y encuentra tu próximo antojo.',
-  all: 'Todo el menú', filterLabel: 'Categorías del menú', count: 'opciones',
+  all: 'Todo el menú', filterLabel: 'Categorías del menú', count: 'opciones', countOne: 'opción',
   contact: 'Consultar por WhatsApp',
 }
 export const eventsCopy = {
