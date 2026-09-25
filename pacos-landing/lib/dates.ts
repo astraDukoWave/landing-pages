@@ -1,3 +1,5 @@
+import { business } from '@/config/business'
+
 /**
  * Fechas ISO se anclan a UTC explícitamente (T00:00:00Z + timeZone: 'UTC' en el
  * formateo) para que el día de la semana no dependa de la zona horaria de la
@@ -23,8 +25,8 @@ export function formatEventDayMonth(dateISO: string): string {
 }
 
 export function isPastDate(dateISO: string, now: Date = new Date()): boolean {
-  const startOfToday = new Date(
-    Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate())
-  )
-  return toUtcDate(dateISO).getTime() < startOfToday.getTime()
+  const today = new Intl.DateTimeFormat('en-CA', {
+    timeZone: business.timeZone, year: 'numeric', month: '2-digit', day: '2-digit',
+  }).format(now)
+  return dateISO < today
 }

@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss'
+import { theme } from './config/theme'
 
 const config: Config = {
   content: ['./app/**/*.{ts,tsx}', './components/**/*.{ts,tsx}'],
@@ -8,23 +9,24 @@ const config: Config = {
         // Capa base: paleta cruda de Paco's. No se consume directo en components/
         // (regla acotada REQ-01) — la capa semántica de abajo es el contrato de consumo.
         pacos: {
-          black: '#0A0A0A',
-          fire: '#FF4500',
-          'fire-dark': '#CC3700',
-          amber: '#FF8C00',
-          white: '#F5F5F5',
-          gray: '#1A1A1A',
+          black: theme.surface,
+          fire: theme.primary,
+          'fire-dark': theme.primaryStrong,
+          amber: theme.accent,
+          white: theme.ink,
+          gray: theme.elevated,
         },
         // Capa semántica: lo único que components/ debe usar para identidad y estado.
         brand: {
-          primary: '#FF4500',
-          'primary-strong': '#CC3700',
-          accent: '#FF8C00',
+          primary: theme.primary,
+          onPrimary: theme.onPrimary,
+          'primary-strong': theme.primaryStrong,
+          accent: theme.accent,
         },
-        surface: '#0A0A0A',
-        'surface-elevated': '#1A1A1A',
-        ink: '#F5F5F5',
-        'ink-muted': '#7F7F7F',
+        surface: theme.surface,
+        'surface-elevated': theme.elevated,
+        ink: theme.ink,
+        'ink-muted': theme.muted,
         state: {
           live: '#DC2626',
           confirmed: '#10B981',

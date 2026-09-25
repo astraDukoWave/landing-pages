@@ -1,4 +1,6 @@
 import { ImageResponse } from 'next/og'
+import { business } from '@/config/business'
+import { theme } from '@/config/theme'
 
 export const size = { width: 32, height: 32 }
 export const contentType = 'image/png'
@@ -13,14 +15,14 @@ export default function Icon() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: '#FF4500',
+          backgroundColor: theme.primary,
           borderRadius: 6,
-          color: '#0A0A0A',
+          color: theme.onPrimary,
           fontSize: 22,
           fontWeight: 800,
         }}
       >
-        P
+        {business.shortName.charAt(0)}
       </div>
     ),
     { ...size }

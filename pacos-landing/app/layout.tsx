@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import './globals.css'
-import { business } from '@/config/business'
+import { business, siteTitle } from '@/config/business'
 import { buildLocalBusinessSchema } from '@/lib/schema'
-import DemoNoticeToast from '@/components/DemoNoticeToast'
+import { navCopy } from '@/data/copy'
 
 // Fuentes autohospedadas (Pista C1): el build ya no depende de fonts.googleapis.com.
 const bebasNeue = localFont({
@@ -26,22 +26,23 @@ const inter = localFont({
 
 // Fuente única de metadata (antes duplicada entre layout.tsx y page.tsx).
 export const metadata: Metadata = {
+  robots: business.demo ? { index: false, follow: false } : { index: true, follow: true },
   metadataBase: new URL(business.baseUrl),
-  title: business.seo.title,
+  title: siteTitle,
   description: business.seo.description,
   keywords: business.seo.keywords.join(', '),
   alternates: {
     canonical: business.baseUrl,
   },
   openGraph: {
-    title: business.seo.title,
+    title: siteTitle,
     description: business.seo.description,
     url: business.baseUrl,
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: business.seo.title,
+    title: siteTitle,
     description: business.seo.description,
   },
 }
@@ -56,13 +57,13 @@ export default function RootLayout({
       <body
         className={`${bebasNeue.variable} ${inter.variable} bg-surface text-ink font-body`}
       >
-        <script
+        <a href="#contenido" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-surface focus:p-4">{navCopy.skip}</a>
+        {!business.demo && <script
           type="application/ld+json"
           // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(buildLocalBusinessSchema()) }}
-        />
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(buildLocalBusinessSchema()).replace(/</g, '\\u003c') }}
+        />}
         {children}
-        {business.whatsapp.mode === 'demo' && <DemoNoticeToast />}
       </body>
     </html>
   )

@@ -1,103 +1,30 @@
-"use client"
-
-import { useEffect, useState } from 'react'
-import { business, formatWeeklyHoursSummary } from '@/config/business'
+import { business } from '@/config/business'
 import { heroCopy } from '@/data/copy'
 
-function useScrollTrigger() {
-  const [triggered, setTriggered] = useState(false)
-
-  useEffect(() => {
-    const updateTrigger = () => {
-      setTriggered(window.scrollY > 0)
-    }
-
-    updateTrigger()
-    window.addEventListener('scroll', updateTrigger, { passive: true })
-
-    return () => {
-      window.removeEventListener('scroll', updateTrigger)
-    }
-  }, [])
-
-  return triggered
-}
-
 export default function Hero() {
-  const hasScrolled = useScrollTrigger()
-  const [isVisible, setIsVisible] = useState(false)
-
-  useEffect(() => {
-    const frame = window.requestAnimationFrame(() => {
-      setIsVisible(true)
-    })
-
-    return () => {
-      window.cancelAnimationFrame(frame)
-    }
-  }, [])
-
-  const revealClass = () =>
-    `transform transition-all duration-700 ease-out ${
-      isVisible ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'
-    }`
-
   return (
-    <section
-      id="hero"
-      aria-label="Hero de Paco's Wings & Beer"
-      className="relative h-screen min-h-[100svh] overflow-hidden bg-surface"
-    >
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-br from-surface via-surface-elevated to-surface"
-      />
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/35 to-transparent"
-      />
-
-      <div className="relative z-10 flex h-full items-center">
-        <div className="w-full px-6 sm:px-10 md:pl-14 lg:pl-20 xl:pl-28">
-          <div className="max-w-5xl">
-            <div
-              className={`${revealClass()} mb-5 inline-flex items-center gap-2 rounded-full bg-state-live px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-white`}
-              style={{ transitionDelay: '150ms' }}
-            >
-              <span className="inline-flex h-2.5 w-2.5 items-center justify-center rounded-full bg-white/20">
-                <span className="h-2 w-2 rounded-full bg-white animate-pulse" />
-              </span>
-              <span>{heroCopy.liveBadge}</span>
-            </div>
-
-            <h1
-              className={`${revealClass()} font-display text-6xl uppercase leading-[0.9] tracking-tight text-ink md:text-8xl lg:text-9xl`}
-              style={{ transitionDelay: '300ms' }}
-            >
-              <span className="block max-w-[10ch] sm:max-w-none">
-                {heroCopy.headline}
-              </span>
-            </h1>
-
-            <p
-              className={`${revealClass()} mt-5 max-w-3xl text-sm uppercase tracking-widest text-ink/60 md:text-base`}
-              style={{ transitionDelay: '600ms' }}
-            >
-              {business.address.street.toUpperCase()} · {formatWeeklyHoursSummary().toUpperCase()}
-            </p>
-          </div>
+    <section id="inicio" className="shell grid gap-12 py-12 md:grid-cols-[1.15fr_1fr] md:items-center md:gap-10 md:py-20">
+      <div>
+        <p className="eyebrow">{heroCopy.eyebrow}</p>
+        <h1 className="mt-7 font-display text-[clamp(4.8rem,10vw,9rem)] leading-[0.87] tracking-tight">
+          {heroCopy.headline.map((line, i) => <span key={line} className={`block ${i === 1 ? 'text-brand-accent' : ''}`}>{line}</span>)}
+        </h1>
+        <p className="mt-7 max-w-md text-base leading-relaxed text-ink-muted">{heroCopy.description}</p>
+        <div className="mt-8 flex flex-wrap gap-3">
+          <a className="button-primary" href="#menu">{heroCopy.menu} <span aria-hidden="true">↗</span></a>
+          <a className="button-secondary" href="#visitanos">{heroCopy.visit}</a>
         </div>
+        <p className="mt-8 text-xs uppercase tracking-[0.18em] text-ink-muted">{business.address.city} / {business.address.region}</p>
       </div>
-
-      <div
-        aria-hidden="true"
-        className={`absolute bottom-6 left-1/2 z-10 -translate-x-1/2 text-brand-primary/60 transition-all duration-300 ${
-          hasScrolled ? 'pointer-events-none translate-y-2 opacity-0' : 'opacity-100'
-        }`}
-      >
-        <span className="inline-flex h-10 w-10 items-center justify-center text-2xl animate-bounce">
-          ↓
-        </span>
+      <div className="relative border border-brand-primary/50 bg-brand-primary p-7 text-brand-onPrimary sm:p-10 md:rotate-2">
+        <div className="flex justify-between border-b border-brand-onPrimary/40 pb-5 text-xs font-bold uppercase tracking-[0.15em]">
+          <span>{business.shortName}</span><span>{heroCopy.posterTop}</span>
+        </div>
+        <p className="whitespace-pre-line py-9 font-display text-[clamp(3.5rem,6.7vw,6.5rem)] leading-[0.9] tracking-tight">{heroCopy.posterMain}</p>
+        <div className="flex items-center justify-between border-t border-brand-onPrimary/40 pt-5">
+          <span className="text-xs font-bold uppercase tracking-widest">{heroCopy.posterBottom}</span>
+          <span aria-hidden="true" className="text-4xl">✳</span>
+        </div>
       </div>
     </section>
   )

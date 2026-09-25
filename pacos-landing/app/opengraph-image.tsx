@@ -1,7 +1,8 @@
 import { ImageResponse } from 'next/og'
-import { business } from '@/config/business'
+import { business, siteTitle } from '@/config/business'
+import { theme } from '@/config/theme'
 
-export const alt = business.seo.title
+export const alt = siteTitle
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
@@ -16,9 +17,8 @@ export default async function OpengraphImage() {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: '#0A0A0A',
-          backgroundImage:
-            'radial-gradient(circle at 30% 20%, rgba(255,69,0,0.35), transparent 55%), radial-gradient(circle at 80% 80%, rgba(255,140,0,0.25), transparent 50%)',
+          backgroundColor: theme.surface,
+
         }}
       >
         <div
@@ -27,11 +27,11 @@ export default async function OpengraphImage() {
             fontSize: 148,
             fontWeight: 800,
             letterSpacing: '-0.02em',
-            color: '#FF4500',
+            color: theme.accent,
             lineHeight: 1,
           }}
         >
-          PACO&apos;S
+          {business.shortName}
         </div>
         <div
           style={{
@@ -40,20 +40,20 @@ export default async function OpengraphImage() {
             fontSize: 40,
             fontWeight: 600,
             letterSpacing: '0.3em',
-            color: '#F5F5F5',
+            color: theme.ink,
           }}
         >
-          WINGS &amp; BEER
+          {business.subtitle}
         </div>
         <div
           style={{
             display: 'flex',
             marginTop: 40,
             fontSize: 26,
-            color: 'rgba(245,245,245,0.6)',
+            color: theme.muted,
           }}
         >
-          Cholula, Puebla
+          {business.demo ? 'PROPUESTA WEB · DEMOSTRACIÓN' : `${business.address.city}, ${business.address.region}`} 
         </div>
       </div>
     ),

@@ -25,9 +25,10 @@ export default function EventCalendar() {
   const upcomingEvents = getUpcomingEvents()
 
   return (
-    <section className="bg-surface-elevated py-20 md:py-32">
-      <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-8">
+    <section className="bg-surface py-16 md:py-20">
+      <div className="shell">
         <div className="max-w-3xl">
+          <p className="eyebrow mb-4">{eventsCopy.eyebrow}</p>
           <h2 className="font-display text-4xl uppercase tracking-tight text-ink md:text-6xl">
             {eventsCopy.heading}
           </h2>
@@ -49,7 +50,7 @@ export default function EventCalendar() {
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div>
-                      <p className="font-display text-4xl uppercase leading-none tracking-tight text-brand-primary md:text-5xl">
+                      <p className="font-display text-4xl uppercase leading-none tracking-tight text-brand-accent md:text-5xl">
                         {formatEventWeekday(event.dateISO)}
                       </p>
                       <p className="mt-1 text-sm uppercase tracking-[0.28em] text-ink-muted">
@@ -70,24 +71,24 @@ export default function EventCalendar() {
                     </p>
 
                     <p className="text-sm uppercase tracking-[0.18em] text-ink/60">
-                      Desde las {event.hora}
+                      {eventsCopy.from} {event.hora}
                     </p>
                   </div>
                 </article>
               ))}
             </div>
 
-            <div className="mt-12 border-t border-ink/10 pt-8 md:mt-16">
+            {business.instagram.confirmed && <div className="mt-12 border-t border-ink/10 pt-8 md:mt-16">
               <a
                 href={`https://instagram.com/${business.instagram.handle}`}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.22em] text-ink/70 transition-colors hover:text-brand-primary"
+                className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.22em] text-ink/70 transition-colors hover:text-brand-accent"
               >
                 <span>{eventsCopy.instagramCta}</span>
                 <span aria-hidden="true">↗</span>
               </a>
-            </div>
+            </div>}
           </>
         )}
       </div>
