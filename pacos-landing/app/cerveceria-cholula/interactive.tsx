@@ -90,7 +90,7 @@ export function MenuExplorer() {
         ))}
       </div>
       <p className={styles.menuCount} aria-live="polite">
-        {items.length} propuestas de muestra · Sin precios confirmados
+        {items.length} {items.length === 1 ? 'propuesta de muestra' : 'propuestas de muestra'} · Sin precios confirmados
       </p>
       <div className={styles.menuList}>
         {items.map((item, index) => (

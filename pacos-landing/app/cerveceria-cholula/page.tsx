@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     title: "Cervecería Cholula · Demo LAB",
     description: "Una propuesta visual. No es el sitio oficial.",
     url: "/cerveceria-cholula",
-    images: [{ url: "/cerveceria-cholula/logo.png", width: 400, height: 400 }],
+    images: [{ url: "/cerveceria-cholula/logo.png", width: 1080, height: 400 }],
     type: "website",
   },
   twitter: {
