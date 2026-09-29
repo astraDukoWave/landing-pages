@@ -75,3 +75,12 @@ are filtered per request. Pricing or menu edits happen in `data/menu.ts`.
 Build and lint. Check widths 360, 768, 1280, keyboard/focus, category reset, all
 contact contexts, Escape, map destination, unconfirmed Instagram, noindex, sitemap,
 OG and event expiry. Do not send messages, create orders or claim business results.
+
+## Cervecería Cholula demo
+`app/cerveceria-cholula/` is an isolated non-official proposal; its addition does
+not replace Paco’s at `/`. Business facts and illustrative collections live in
+`data/cerveceria-cholula/content.ts`; route-specific editorial copy is currently
+colocated with the page. Scoped CSS owns this demo's palette. Its brief and QA
+live in `docs/specs/CERVECERIA_CHOLULA_DEMO_v1.md`. Preserve the demo warnings,
+noindex and local-only enquiry flow. Do not activate business messaging without
+a confirmed scope and owner-approved contact details.

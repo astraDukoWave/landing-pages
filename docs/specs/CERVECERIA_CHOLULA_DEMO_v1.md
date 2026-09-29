@@ -44,3 +44,15 @@ route metadata and icons do not identify Paco's; root route is preserved.
 2. Verify build, interactions and responsive rendering.
 3. Push branch/open PR, inspect Vercel preview, report limits for review.
 Rollback: close unmerged PR; if later published, revert its merge.
+
+## Verification record — 2026-09-28
+- Local production build, TypeScript and lint passed. Separate lint: no warnings.
+- Local HTTP: both routes 200, new route noindex and no Paco brand in HTML.
+- Vercel preview: desktop visual review and CSS iframe widths 360, 768, 1280.
+  Content widths equal client widths (345/753/1265 with scrollbar), no horizontal overflow.
+- Beer profiles, sample-menu filtering, enquiry with event/group and reset on
+  field changes verified in browser. No real message submitted.
+- Browser log errors observed belonged to its extension, not the app.
+- Temporary responsive harness removed after QA; not part of delivered feature.
+- No physical-device test or complete accessibility audit claimed.
+- Official menu and venue photos remain pending; independent proposal only.
