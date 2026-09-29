@@ -1,9 +1,7 @@
 "use client";
-import { useState } from "react";
+import { useState, type CSSProperties } from "react";
 import {
-  beerStyles,
-  menuCategories,
-  sampleMenu,
+  beerStyles, brewery,
 } from "@/data/cerveceria-cholula/content";
 import styles from "./styles.module.css";
 
@@ -34,7 +32,7 @@ export function BeerExplorer() {
           <span className={styles.artCircle} />
           <div
             className={styles.glass}
-            style={{ "--beer-color": beer.tone } as React.CSSProperties}
+            style={{ "--beer-color": beer.tone } as CSSProperties}
           >
             <div className={styles.foam} />
             <span>
@@ -54,57 +52,12 @@ export function BeerExplorer() {
             <span>Amargor: {beer.level}</span>
           </div>
           <a className={styles.textLink} href="#visita">
-            Preparar una consulta ↗
+            Organiza tu visita ↗
           </a>
           <small>
-            Guía de estilos ilustrativa. Etiquetas y disponibilidad pendientes
-            de confirmar; no es la oferta vigente.
+            Los perfiles describen estilos cerveceros, no un catálogo. Consulta con el equipo las etiquetas disponibles.
           </small>
         </div>
-      </div>
-    </div>
-  );
-}
-
-export function MenuExplorer() {
-  const [category, setCategory] = useState<string>("Todo");
-  const items = sampleMenu.filter(
-    (item) => category === "Todo" || item.category === category,
-  );
-  return (
-    <div>
-      <div
-        className={styles.menuFilters}
-        role="group"
-        aria-label="Categorías de la carta"
-      >
-        {menuCategories.map((item) => (
-          <button
-            type="button"
-            key={item}
-            aria-pressed={category === item}
-            onClick={() => setCategory(item)}
-          >
-            {item}
-          </button>
-        ))}
-      </div>
-      <p className={styles.menuCount} aria-live="polite">
-        {items.length} {items.length === 1 ? 'propuesta de muestra' : 'propuestas de muestra'} · Sin precios confirmados
-      </p>
-      <div className={styles.menuList}>
-        {items.map((item, index) => (
-          <article key={item.name}>
-            <span className={styles.menuNumber}>
-              {String(index + 1).padStart(2, "0")}
-            </span>
-            <div>
-              <h3>{item.name}</h3>
-              <p>{item.detail}</p>
-            </div>
-            <span className={styles.sampleLabel}>EJEMPLO</span>
-          </article>
-        ))}
       </div>
     </div>
   );
@@ -114,6 +67,7 @@ export function VisitPlanner() {
   const [reason, setReason] = useState("Una visita al restaurante");
   const [group, setGroup] = useState("2 personas");
   const [preview, setPreview] = useState(false);
+  const [copyStatus, setCopyStatus] = useState("");
   const message = `Hola, Cervecería Cholula. Me interesa: ${reason.toLowerCase()}. Seríamos ${group.toLowerCase()}. ¿Me pueden compartir horarios, disponibilidad y cómo organizar la visita?`;
   return (
     <div className={styles.planner}>
@@ -127,6 +81,7 @@ export function VisitPlanner() {
         onSubmit={(event) => {
           event.preventDefault();
           setPreview(true);
+          setCopyStatus("");
         }}
       >
         <label htmlFor="visit-reason">Me interesa</label>
@@ -136,11 +91,12 @@ export function VisitPlanner() {
           onChange={(event) => {
             setReason(event.target.value);
             setPreview(false);
+            setCopyStatus("");
           }}
         >
           <option>Una visita al restaurante</option>
-          <option>Conocer la fábrica</option>
-          <option>Organizar un evento privado</option>
+          <option>Consultar sobre la fábrica</option>
+          <option>Consultar opciones para una reunión</option>
         </select>
         <label htmlFor="visit-group">Vamos en grupo de</label>
         <select
@@ -149,6 +105,7 @@ export function VisitPlanner() {
           onChange={(event) => {
             setGroup(event.target.value);
             setPreview(false);
+            setCopyStatus("");
           }}
         >
           <option>2 personas</option>
@@ -157,24 +114,32 @@ export function VisitPlanner() {
           <option>Más de 12 personas</option>
         </select>
         <button type="submit" className={styles.button}>
-          Ver consulta de ejemplo <span aria-hidden="true">↗</span>
+          Preparar mi consulta <span aria-hidden="true">↗</span>
         </button>
       </form>
       <div role="status" aria-live="polite">
         {preview && (
           <div className={styles.messagePreview}>
-            <strong>Así se prepararía tu mensaje</strong>
+            <strong>Tu consulta, lista para revisar</strong>
             <p>{message}</p>
+            <button type="button" className={styles.copyButton} onClick={async () => {
+              try {
+                await navigator.clipboard.writeText(message);
+                setCopyStatus("Consulta copiada. Ya puedes pegarla en el canal que elijas.");
+              } catch {
+                setCopyStatus("Puedes seleccionar y copiar el texto de tu consulta manualmente.");
+              }
+            }}>Copiar consulta</button>
+            {copyStatus ? <p>{copyStatus}</p> : null}
+            <a href={brewery.linktree} target="_blank" rel="noopener noreferrer" className={styles.textLink}>Abrir canales de contacto ↗</a>
             <small>
-              No se envió ningún mensaje. Esta demostración no confirma una
-              reserva.
+              Copia esta consulta y compártela con el equipo por sus canales de contacto. La disponibilidad se confirma directamente con el negocio.
             </small>
           </div>
         )}
       </div>
       <p className={styles.fine}>
-        Modo demostración. No pedimos datos personales ni enviamos mensajes.
-        Servicios y capacidad sujetos a confirmación.
+        La consulta se prepara en tu pantalla. No se envía ni se guarda ningún dato.
       </p>
     </div>
   );
